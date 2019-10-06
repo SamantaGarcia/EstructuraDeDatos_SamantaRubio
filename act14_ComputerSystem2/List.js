@@ -4,16 +4,13 @@ export default class List{
         this._myArray = new Array(20);
         this._list = '';
         this._item = 0;
-        
     }
     
     addProduct(product){
+        
         if (this._item > 20) {
-            return alert('Array lleno');
+            return alert('El array está lleno');
         }else{
-            if (product.code < objProduct[i].code) {
-                
-            }
         let objProduct = {
             code : product.code,
             name : product.name,
@@ -21,7 +18,18 @@ export default class List{
             quantity : product.quantity,
             description : product.description
         };
-              this._list+= 'code: ' + objProduct.code +
+
+        if (this._item == 0) {
+            this.pushInArray(objProduct);
+            console.log(this._myArray);
+        }else{     
+            this.order(objProduct.code, objProduct);
+        }
+     }
+}
+
+    pushInArray(objProduct){
+        this._list+= 'code: ' + objProduct.code +
                 ' name: ' + objProduct.name + 
                 ' price: ' + objProduct.price + 
                 ' quantity: ' + objProduct.quantity + 
@@ -29,22 +37,55 @@ export default class List{
             document.getElementById('div').innerText = this._list;
 
             this._myArray[this._item] = objProduct;
-            this._item = this._item + 1;           
-
-            }
-    
-        console.log(this._myArray);
+            this._item ++;   
+               
     }
 
-    _findProduct(email){
-        let foundPos = -1
-        this._contacts.forEach((e, index) => {
-            if (e.email === email) {
-                foundPos = index;
-                return;
+    binarySearch(value) {
+        let first = 0;   
+        let last = this._item -1;
+        let position = -1;
+        let found = false;
+        let middle;
+        //console.log("cuantos: "+ this._item);
+        while (found === false && first <= last) {
+            middle = Math.floor((first + last)/2);
+            //console.log(middle + " .. "+this._myArray[middle].code)
+            if (this._myArray[middle].code == value) {
+                found = true;
+                position = middle;
+            } else if (this._myArray[middle].code > value) {  
+                last = middle - 1;
+            } else {  
+                first = middle + 1;
             }
-        });
-        return foundPos;
+        }
+        document.getElementById('div').innerText = 
+        'code: ' + this._myArray[middle].code +
+        ' name: ' + this._myArray[middle].name + 
+        ' price: ' + this._myArray[middle].price + 
+        ' quantity: ' + this._myArray[middle].quantity + 
+        ' description: ' + this._myArray[middle].description + '\n';;
+        //console.log(position);
+        return position;
     }
+
+    // order(code, object){
+    //     let before = this._item -1;
+    //     console.log("before "+ this._myArray[before].code);
+    //     if (code < this._myArray[before].code) {
+    //         while (code < this._myArray[before].code) {
+    //            newP= this._myArray[before]-1;
+    //         }
+    //         object = this._myArray[before];
+    //         this.pushInArray(objProduct);
+    //         console.log(this._myArray);
+    //         console.log("Es menor");  
+    //     } else{
+    //         console.log("Es mayor");  
+    //     }
+    // }
+
+
 }
 

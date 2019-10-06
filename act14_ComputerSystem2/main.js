@@ -27,6 +27,10 @@ class Main{
             schedule.addProduct(product);
         } form.classList.add("was-validated");
     });
+    document.querySelector("#btnSearch").addEventListener("click", () =>{
+        let searchName = document.querySelector("#searchName").value;
+        schedule.binarySearch(searchName);
+    });
 
 };
 }
