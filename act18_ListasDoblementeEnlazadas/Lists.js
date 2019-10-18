@@ -36,21 +36,28 @@ export default class List{
             this._init = newP;
         }else{
             this._addNext(newP, this._init);
-            if (newP._next == null) {
-                this._last = newP._next;
-            }
         }
         this._addObject(newP);
         console.log(this._init);
     }
 
-    _addNext(newP, last){
-        newP._previous = last;        
-        if (last._next == null) {
-                last._next = newP;
-        } else {
+    _addNext(newP, last){    
+        let helperP = null;   
+        if (newP.code >= last.code && last._next == null) {
+            last._next = newP;
+            console.log("Mayor");
+            return;
+        }         
+        else if (newP.code < last.code) {
+            helperP = last._previous;
+            last._previous = newP;
+            newP._previous = helperP;
+            console.log("Menor");
+            return;
+        }
+         else {
             this._addNext(newP, last._next);
-              //  console.log(last._next);
+              console.log("Recursividad");
         }  
     }
 
