@@ -42,9 +42,10 @@ export default class List{
     }
 
     _addNext(newP, last){    
-        let helperP = null;   
+        let helperP = null;
         if (newP.code >= last.code && last._next == null) {
             last._next = newP;
+            newP._previous = last;
             console.log("Mayor");
             return;
         }         
@@ -52,6 +53,8 @@ export default class List{
             helperP = last._previous;
             last._previous = newP;
             newP._previous = helperP;
+            newP._next = last;
+            newP._previous._next = newP;
             console.log("Menor");
             return;
         }
