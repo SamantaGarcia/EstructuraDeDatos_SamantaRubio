@@ -10,10 +10,11 @@
 <body>
     <div class="container">
         <div class="row">
-                <h3>Recorrido de rutas</h3>
+                
         </div>
         <div class="row">
-            <div class="col-md-6">                
+            <div class="col-md-3">    
+                    <h3>Crear Base</h3>            
                 <form id="form">
                     <div class="form-group">
                     <label for="exampleInputPassword1">id</label>
@@ -21,34 +22,53 @@
                     </div>
                     <div class="form-group">
                     <label for="exampleInputPassword1">Nombre</label>
-                    <input type="text" class="form-control" id="Nombre" placeholder="Ingresa el nombre de la base" value="Centro">
+                    <input type="text" class="form-control" id="nombre" placeholder="Ingresa el nombre de la base" value="Centro">
                     </div>
                     <div class="form-group">
                     <label for="exampleInputPassword1">Minutos</label>
-                    <input type="number" class="form-control" id="Minutos" placeholder="Ingresa los minutos en llegar al destino" value="5">
+                    <input type="number" class="form-control" id="minutos" placeholder="Ingresa los minutos en llegar al destino" value="5">
                     </div>            
-                    <button type="button" id="btnAdd" class="btn btn-primary">ADD</button>
+                    <button type="button" id="btnAdd" class="btn btn-primary">AGREGAR</button>
                 </form>
             </div>
-            <div class="col-md-6">
-                    <div class="row">
-                            <h4>Lista de bases:</h4>
-                            <div id="imprimirLista"></div>
-                        </div> 
-                <div class="row">
-                    <div class="col-md-6">
-                            <input type="text" class="form-control" id="searchName" placeholder="Enter the product's code" style="width: 15pc">
-                    </div>
-                    <div class="col-md-6">
-                            <button type="button" id="btnSearch" class="btn btn-success">SEARCH</button>
-                            <button type="button" id="btnDelete" class="btn btn-danger">DELETE</button>
-                    </div>
-                    <div class="col-md-6" id="div"></div>
-                </div>
 
-                
+            <div class="col-md-3">   
+                    <h3>Crear Recorrido</h3>             
+                <form id="form">
+                    <div class="form-group">
+                    <label for="exampleInputPassword1">Base de inicio</label>
+                    <input type="text" class="form-control" id="baseInicio" placeholder="Ingresa el id de la base" >
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleInputPassword1">Hora de inicio</label>
+                    <input type="time" class="form-control" id="horaInicio">
+                    </div>
+                    <div class="form-group">
+                    <label for="exampleInputPassword1">Hora de fin</label>
+                    <input type="time" class="form-control" id="horaFin" >
+                    </div>            
+                    <button type="button" id="btnCrear" class="btn btn-warning">CREAR</button>
+                </form>
+            </div>
+
+            <div class="col-md-6">
+                    <h3>Buscar/Borrar Base</h3> <br>
+                <div class="row">                        
+                    <div class="col-md-6">
+                            <input type="text" class="form-control" id="searchName" placeholder="Ingresa el código de la ruta" style="width: 15pc">
+                    </div>
+                    <div class="col-md-6">
+                            <button type="button" id="btnSearch" class="btn btn-success">BUSCAR</button>
+                            <button type="button" id="btnDelete" class="btn btn-danger">BORRAR</button>
+                    </div>
+                    <div class="col-md-6" id="div2"></div>
+                </div>               
                                    
             </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3" id="div"></div>
+            <div class="col-md-3" id="div3"></div>
         </div>
     </div>
 </body>

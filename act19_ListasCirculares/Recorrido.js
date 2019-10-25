@@ -26,9 +26,25 @@ export default class Recorrido{
     }
 
     _imprimir(base){
-        this._list+= 'Nombre: ' + base.code +
-                ' Minutos: ' + base.description + '\n';
+        this._list+= 
+                ' Id: ' + base.id +
+                ' Nombre: ' + base.nombre +
+                ' Minutos: ' + base.minutos + '\n';
             document.getElementById('div').innerText = this._list;
+    }
+    _imprimir2(base){
+        this._list+= 
+                ' Id: ' + base.id +
+                ' Nombre: ' + base.nombre +
+                ' Minutos: ' + base.minutos + '\n';
+            document.getElementById('div2').innerText = this._list;
+    }
+    _imprimir3(base){
+        this._list+= 
+                ' Id: ' + base.id +
+                ' Nombre: ' + base.nombre +
+                ' Minutos: ' + base.minutos + '\n';
+            document.getElementById('div3').innerText = this._list;
     }
 
     _agregarObj(base){
@@ -43,36 +59,88 @@ export default class Recorrido{
     agregar(nuevaB){
         if (this._inicio == null) {
             this._inicio = nuevaB;
+            this._inicio._anterior = this._ultimo;
         }else{
             this._agregarSiguiente(nuevaB, this._inicio);
         }
-        this._addObject(nuevaB);
+        this._agregarObj(nuevaB);
         console.log(this._inicio);
     }
 
     _agregarSiguiente(nuevaB, siguiente){    
         let helperP = null;
-        if (nuevaB.id >= siguiente.id && siguiente._next == null) {
-            siguiente._next = nuevaB;
-            this._ultimo = siguiente._next;
-            //
-            nuevaB._previous = siguiente;
+        if (nuevaB.id >= siguiente.id && siguiente._siguiente == null) {
+            siguiente._siguiente = nuevaB;
+            this._ultimo = siguiente._siguiente;
+            nuevaB._anterior = siguiente;
             console.log("Mayor");
             return;
         }         
         else if (nuevaB.id < siguiente.id) {
-            helperP = siguiente._previous;
-            siguiente._previous = nuevaB;
-            nuevaB._previous = helperP;
-            nuevaB._next = siguiente;
-            nuevaB._previous._next = nuevaB;
+            helperP = siguiente._anterior;
+            siguiente._anterior = nuevaB;
+            nuevaB._anterior = helperP;
+            nuevaB._siguiente = siguiente;
+            nuevaB._anterior._siguiente = nuevaB;
             console.log("Menor");
             return;
         }
-         else {
-            this._agregarSiguiente(nuevaB, siguiente._next);
-              console.log("Recursividad");
+        else {
+            this._agregarSiguiente(nuevaB, siguiente._siguiente);
+            console.log("Recursividad");
         }  
+    }
+
+    Search(valor){
+        this._temp = this._inicio;
+
+        while(this._temp.id != valor){
+            this._temp=this._temp._siguiente;
+        }            
+            this._list='';
+            this._imprimir2(this._temp); 
+            return this._temp;          
+        
+    }
+    Delete(value){
+        this._temp = this._inicio;
+
+        while(this._temp._siguiente.id != value){
+            this._temp=this._temp._siguiente;
+            console.log(this._temp)
+        }              
+        if (this._temp._siguiente.id == value) {
+            this._temp._siguiente = this._temp._siguiente._siguiente;
+        }
+    }
+
+    crearRecorrido(baseInicio, horaInicio, horaFin){
+        
+        let baseNueva = this.Search(baseInicio);        
+        let temp = baseNueva;
+        let contadorMinutos = temp._minutos;
+
+        horaInicio = horaInicio.split(":");
+        horaFin = horaFin.split(":");
+
+        let minsI = (+horaInicio[0]*60) + (+horaInicio[1]);
+        let minsF = (+horaFin[0]*60) + (+horaFin[1]);
+
+        let totalM= minsI - minsF;
+        if (totalM < 0) {
+            totalM = totalM * -1;
+        }
+
+        while (contadorMinutos <= totalM) {
+            temp = temp._siguiente;
+            contadorMinutos += temp._minutos;
+            console.log("contador: "+contadorMinutos);
+            this._imprimir3(temp);
+            baseNueva = temp;  
+
+        }
+        
+              
     }
 }
 
