@@ -1,0 +1,13 @@
+extraer(){
+	while (inicio.siguiente != null){
+	if (prioridad != null){
+		let aux = inicio;
+		inicio = prioridad;
+		inicio.siguiente = aux;
+	} else {
+		let auxiliar = inicio;
+		inicio = inicio.siguiente;
+		return auxiliar;
+	}
+    }
+}
